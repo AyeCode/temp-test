@@ -3,11 +3,9 @@ var fetchModule = require("fetch");
 var authorInfoModel = require("../../shared/utils/get-author-info");
 var ObservableArray = require("data/observable-array").ObservableArray;
 
-var jobby = 1234;
 
 function blogListViewModel(items) {
 
-    alert('###'+jobby);
     var viewModel = new ObservableArray(items);
     var authors_arr = new ObservableArray([]);
 
@@ -64,6 +62,8 @@ console.log('#####'+post.author_id);
                    console.dump(author);
                    console.log(author.image);
                    post.author_img = author.image; //THIS SHOULD WORK????
+                   post.author_img = "https://secure.gravatar.com/avatar/e3ef355dd9a03c743615ad68657312ef?s=24&d=mm&r=g";
+
 
                }).catch(function(error) {
                    console.log(error);
