@@ -52,8 +52,11 @@ function blogListViewModel(items) {
             console.dump(post);
             if(post.author_img==''){
 
+                // this will work
+                //post.author_img = "https://secure.gravatar.com/avatar/e3ef355dd9a03c743615ad68657312ef?s=24&d=mm&r=g";
 
-               authors.get(post.author_id).then(function(r) {
+
+                authors.get(post.author_id).then(function(r) {
                    //console.dump(authors);
                    //console.dump(authors.getItem(1));
                    //console.dump(authors_arr);
@@ -62,7 +65,6 @@ console.log('#####'+post.author_id);
                    console.dump(author);
                    console.log(author.image);
                    post.author_img = author.image; //THIS SHOULD WORK????
-                   post.author_img = "https://secure.gravatar.com/avatar/e3ef355dd9a03c743615ad68657312ef?s=24&d=mm&r=g";
 
 
                }).catch(function(error) {
