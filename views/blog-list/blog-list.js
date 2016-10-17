@@ -1,8 +1,10 @@
 var dialogsModule = require("ui/dialogs");
+var frameModule = require("ui/frame");
 var observableModule = require("data/observable");
 var blogListViewModel = require("../../shared/view-models/blog-list-view-model");
 var socialShare = require("nativescript-social-share");
 var swipeDelete = require("../../shared/utils/ios-swipe-delete");
+
 var page;
 
 var blogList = new blogListViewModel([]);
@@ -82,4 +84,18 @@ exports.delete = function(args) {
     var item = args.view.bindingContext;
     var index = blogList.indexOf(item);
     blogList.delete(index);
+};
+
+exports.showBlogPost = function() {
+
+    var topmost = frameModule.topmost();
+
+    var navigationEntry = {
+        moduleName: "views/blog/blog",
+        context: {info: "something you want to pass to your page"},
+        animated: true
+    };
+    topmost.navigate(navigationEntry);
+
+    //topmost.navigate("views/blog-list/blog-list");
 };

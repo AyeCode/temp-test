@@ -10,8 +10,8 @@
         <TextField id="grocery" text="{{ grocery }}" hint="Enter a grocery item" row="0" col="0" />
         <Button text="Add" tap="add" row="0" col="1" />
         <ListView items="{{ blogList }}" id="blogList" row="1" colSpan="2">
-            <ListView.itemTemplate>
-                <GridLayout columns="auto, *">
+            <ListView.itemTemplate >
+                <GridLayout columns="auto, *" tap="showBlogPost">
                     <Image src="{{ author_img }}" ios:visibility="collapsed" col="0" tap="delete" />
                     <Label text="{{ name }}" col="1" />
                 </GridLayout>
