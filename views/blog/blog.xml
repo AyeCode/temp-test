@@ -1,0 +1,22 @@
+<Page loaded="loaded">
+    <Page.actionBar>
+        <ActionBar title="blog details page">
+            <ActionBar.actionItems>
+                <ActionItem text="Share" tap="share" ios.position="right" />
+            </ActionBar.actionItems>
+        </ActionBar>
+    </Page.actionBar>
+    <GridLayout rows="auto, *" columns="2*, *">
+        <TextField id="grocery" text="{{ grocery }}" hint="Enter a grocery item" row="0" col="0" />
+        <Button text="Add" tap="add" row="0" col="1" />
+        <ListView items="{{ blogList }}" id="blogList" row="1" colSpan="2">
+            <ListView.itemTemplate>
+                <GridLayout columns="auto, *">
+                    <Image src="{{ author_img }}" ios:visibility="collapsed" col="0" tap="delete" />
+                    <Label text="{{ name }}" col="1" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+        <ActivityIndicator busy="{{ isLoading }}" rowSpan="2" colSpan="2" />
+    </GridLayout>
+</Page>
