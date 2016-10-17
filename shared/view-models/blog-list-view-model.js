@@ -2,6 +2,12 @@ var config = require("../../shared/config");
 var fetchModule = require("fetch");
 var authorInfoModel = require("../../shared/utils/get-author-info");
 var ObservableArray = require("data/observable-array").ObservableArray;
+var http = require("http");
+var jobby = 111;
+
+var authorsIds = [];
+var authorsArr = [];
+
 
 
 function blogListViewModel(items) {
@@ -30,9 +36,29 @@ function blogListViewModel(items) {
                     author_id: post.author,
                     author_img: ''
                 });
+
+                // we should make this unique
+                if(post.author){
+                    authorsIds.push(post.author);
+                }
+
             });
         }).then(function(response) {
-                viewModel.addAuthorImg();
+                //viewModel.addAuthorImg();
+                console.log(11111111111111);
+                console.dump(authorsIds);
+
+
+
+            }).then(function(response) {
+                viewModel.addAuthorImg2();
+
+
+            }).then(function(response) {
+                viewModel.jobby();
+
+
+
             });
 
     };
@@ -45,7 +71,6 @@ function blogListViewModel(items) {
 
 
     viewModel.addAuthorImg = function(author_id) {
-
         //alert(viewModel.length);
 
         viewModel.forEach(function(post) {
@@ -55,8 +80,7 @@ function blogListViewModel(items) {
                 // this will work
                 //post.author_img = "https://secure.gravatar.com/avatar/e3ef355dd9a03c743615ad68657312ef?s=24&d=mm&r=g";
 
-
-                authors.get(post.author_id).then(function(r) {
+                authors.get(post.author_id).then(function() {
                    //console.dump(authors);
                    //console.dump(authors.getItem(1));
                    //console.dump(authors_arr);
@@ -65,6 +89,7 @@ console.log('#####'+post.author_id);
                    console.dump(author);
                    console.log(author.image);
                    post.author_img = author.image; //THIS SHOULD WORK????
+                    viewModel.addAuthorImg2();
 
 
                }).catch(function(error) {
@@ -86,23 +111,76 @@ console.log('#####'+post.author_id);
         });
     };
 
+    viewModel.jobby = function() {
+        alert('done');
+        console.dump(authorsArr);
+
+        setTimeout(function(){
+alert(12321);
+        viewModel.forEach(function(post) {
+            // if(post.author_img==''){
+            //     author = authors.getItem(post.author_id);
+            //     post.author_img = author.image;
+            //    //post.author_img = "https://secure.gravatar.com/avatar/e3ef355dd9a03c743615ad68657312ef?s=24&d=mm&r=g";
+            // }
+
+            //console.dump(authors.getItem(1));
+            //console.log('@@@@@@@@'+authors.length);
+
+            post.name = "123";
+            post.author_img = "https://secure.gravatar.com/avatar/e3ef355dd9a03c743615ad68657312ef?s=24&d=mm&r=g";
+            //post.author_img = authorsArr[0].image;
+
+        });
+        }, 3000);
+    };
+
     viewModel.addAuthorImg2 = function(author_id) {
 
-            //alert(viewModel.length);
 
-            viewModel.forEach(function(post) {
-                // if(post.author_img==''){
-                //     author = authors.getItem(post.author_id);
-                //     post.author_img = author.image;
-                //    //post.author_img = "https://secure.gravatar.com/avatar/e3ef355dd9a03c743615ad68657312ef?s=24&d=mm&r=g";
-                // }
+        //authorsIds.forEach(function(id) {
 
-                //console.dump(authors.getItem(1));
-                //console.log('@@@@@@@@'+authors.length);
+            return fetch(config.apiUrl + "users/1", {
+                headers: {
+                    "Authorization": "Bearer " + config.token
+                }
+            })
+                .then(function(response) {
+                    return response.json();
+                }).then(function(data) {
+                console.log('aaaa');
+                //console.dump(data);
+                authorsArr.push({
+                    id: data.id,
+                    name: data.name,
+                    url: data.url,
+                    description: data.description,
+                    image: data.avatar_urls["24"] // 24,48,96
+                });
 
-                //post.author_img = "https://secure.gravatar.com/avatar/e3ef355dd9a03c743615ad68657312ef?s=24&d=mm&r=g";
 
             });
+
+       // });
+        
+
+
+       // alert(viewModel.length);
+       // alert(authors.length);
+
+            // viewModel.forEach(function(post) {
+            //     // if(post.author_img==''){
+            //     //     author = authors.getItem(post.author_id);
+            //     //     post.author_img = author.image;
+            //     //    //post.author_img = "https://secure.gravatar.com/avatar/e3ef355dd9a03c743615ad68657312ef?s=24&d=mm&r=g";
+            //     // }
+            //
+            //     //console.dump(authors.getItem(1));
+            //     //console.log('@@@@@@@@'+authors.length);
+            //
+            //     post.author_img = "https://secure.gravatar.com/avatar/e3ef355dd9a03c743615ad68657312ef?s=24&d=mm&r=g";
+            //
+            // });
 
     };
 

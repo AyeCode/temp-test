@@ -1,6 +1,7 @@
 var config = require("../../shared/config");
 var fetchModule = require("fetch");
 var ObservableArray= require("data/observable-array").ObservableArray;
+var http = require("http");
 
 var authors = new ObservableArray([]);
 
@@ -38,6 +39,20 @@ function authorInfoModel(authors) {
                 //console.dump(authors);
 
             });
+    };
+
+
+    viewModel.get2 = function(author_id) {
+
+        // http.getJSON(config.apiUrl + "users/1").then(function (r) {
+        //     //// Argument (r) is JSON!
+        //     return 500;
+        // }, function (e) {
+        //     //// Argument (e) is Error!
+        //     console.log(e);
+        // });
+
+return 600;
     };
 
     viewModel.empty = function() {

@@ -28,8 +28,15 @@ exports.loaded = function(args) {
     blogList.load().then(function() {
         pageData.set("isLoading", false);
 
+        // test = blogList.addAuthorImg2();
+        // alert(test);
+        // console.dump(test);
+
         //blogList.addAuthorImg();
-        //blogList.addAuthorImg2();
+        // blogList.addAuthorImg2().then(function() {
+        //     blogList.jobby();
+        //    
+        // });
 
         listView.animate({
             opacity: 1,
